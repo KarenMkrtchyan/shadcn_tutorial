@@ -22,12 +22,10 @@ interface Recipe {
 
 async function getRecipes(): Promise<Recipe[]> {
   const result = await fetch("http://localhost:4000/recipes", {
-    // This ensures consistent data between server and client
     cache: "force-cache",
-    // Optional: you can add revalidation if you want to refresh periodically
-    // next: { revalidate: 3600 } // revalidate every hour
   });
 
+  await new Promise((r) => setTimeout(r, 3000)); // simulate server delay to show skeleton
   return result.json();
 }
 
